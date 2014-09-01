@@ -1,0 +1,15 @@
+body {
+  background-image: url(../img/universe.gif);
+  text-align: center;
+}
+header > h1 {
+  font-size: 48px;
+}
+#lifegame-canvas {
+  background-color: black;
+  border-color: white;
+  border-width: 1px;
+  border-style: solid;
+  display: block;
+  margin: auto;
+}
