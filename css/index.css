@@ -3,7 +3,9 @@ body {
   text-align: center;
 }
 header > h1 {
-  font-size: 48px;
+  font-size: 64px;
+  -webkit-transform: perspective(100) rotateX(20deg);
+  -moz-transform: perspective(100) rotateX(20deg);
 }
 #lifegame-canvas {
   background-color: black;
@@ -12,4 +14,32 @@ header > h1 {
   border-style: solid;
   display: block;
   margin: auto;
+}
+#control {
+  margin: auto;
+  padding: 20px;
+  width: 300px;
+}
+
+.button {
+  background: linear-gradient(to bottom, #aaddff 0%, #6699bb 80%);
+  border: 1px solid #fff;
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+  color: #000;
+  cursor: pointer;
+  display: inline-box;
+  font-weight: bold;
+  margin: 5px 10px 5px 10px;
+  padding: 8px;
+  text-align: center;
+  text-shadow: 0px 1px 0px #fff;
+}
+.button:hover {
+  background: linear-gradient(to bottom, #ccffff 0%, #88bbdd 80%);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+}
+.button:active {
+  background: linear-gradient(to bottom, #fff 0%, #ddd 80%);
+  box-shadow: none;
 }

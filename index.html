@@ -15,22 +15,41 @@
 <header>
   <h1 style="color: white;">LIFEGAME</h1>
 </header>
+
 <canvas id="lifegame-canvas" width="300" height="300"></canvas>
+
+<div id="control">
+  <span class="button" onClick="lifegame.initBoard(); lifegame.draw()">Init</span>
+  <span class="button" onClick="start()">Start</span>
+  <span class="button" onClick="stop()">Stop</span>
+</div>
 
 <script src="js/lifegame.js"></script>
 <script>
 var lifegame = new LifegameBoard('lifegame-canvas', 5, 'rgb(0, 255, 0)');
 var FPS = 5;
 var updatetime = 1000 / FPS;
+var isContinue = false;
 
 function loop() {
+  if (!isContinue) return;
   lifegame.update();
   lifegame.draw();
   setTimeout('loop()', updatetime);
 };
 
-window.onload = function() {
+function start() {
+  if (isContinue) return;
+  isContinue = true;
   loop();
+}
+
+function stop() {
+  isContinue = false;
+}
+
+window.onload = function() {
+  lifegame.draw();
 }
 </script>
 </body>
