@@ -8,7 +8,7 @@ header > h1 {
   -moz-transform: perspective(100) rotateX(20deg);
 }
 #lifegame-canvas {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0);
   border-color: white;
   border-width: 1px;
   border-style: solid;
