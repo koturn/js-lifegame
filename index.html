@@ -19,34 +19,43 @@
 <canvas id="lifegame-canvas" width="300" height="300"></canvas>
 
 <div id="control">
-  <span class="button" onClick="lifegame.initBoard(); lifegame.draw()">Init</span>
-  <span class="button" onClick="start()">Start</span>
-  <span class="button" onClick="stop()">Stop</span>
+  <span class="button" onClick="lifegame.initBoard(0.3); lifegame.draw()">Init</span>
+  <span class="button" onClick="controller.start()">Start</span>
+  <span class="button" onClick="controller.stop()">Stop</span>
 </div>
 
 <script src="js/lifegame.js"></script>
 <script>
+'use strict';
+
+function LifegameController(lifegame, fps) {
+  this.lifegame = lifegame;
+  this.updatetime = 1000 / fps;
+  this.lifegame.initBoard(0.3);
+  this.timerId = null;
+}
+
+LifegameController.prototype.start = function() {
+  if (this.timeId != null) return;
+  this.lifegame.draw();
+  this.lifegame.update();
+  var __this = this;
+  this.timerId = setInterval(function() {
+    __this.lifegame.draw();
+    __this.lifegame.update();
+  }, this.updatetime);
+}
+
+LifegameController.prototype.stop = function() {
+  if (this.timerId == null) return;
+  clearInterval(this.timerId);
+  this.timerId = null;
+}
+
+
 var lifegame = new LifegameBoard('lifegame-canvas', 5, 'rgb(0, 255, 0)');
-var FPS = 5;
-var updatetime = 1000 / FPS;
-var isContinue = false;
+var controller = new LifegameController(lifegame, 5);
 
-function loop() {
-  if (!isContinue) return;
-  lifegame.update();
-  lifegame.draw();
-  setTimeout('loop()', updatetime);
-};
-
-function start() {
-  if (isContinue) return;
-  isContinue = true;
-  loop();
-}
-
-function stop() {
-  isContinue = false;
-}
 
 window.onload = function() {
   lifegame.draw();
