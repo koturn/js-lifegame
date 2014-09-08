@@ -3,6 +3,7 @@ body {
   text-align: center;
 }
 header > h1 {
+  color: white;
   font-size: 64px;
   -webkit-transform: perspective(100) rotateX(20deg);
   -moz-transform: perspective(100) rotateX(20deg);
