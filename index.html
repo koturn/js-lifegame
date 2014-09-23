@@ -36,7 +36,7 @@ function LifegameController(lifegame, fps) {
 }
 
 LifegameController.prototype.start = function() {
-  if (this.timeId != null) return;
+  if (this.timerId != null) return;
   this.lifegame.draw();
   this.lifegame.update();
   var __this = this;
