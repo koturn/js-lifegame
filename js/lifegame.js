@@ -10,49 +10,51 @@
     this._cellSize = cellSize;
     this._board = new Array(this._nRow * this._nCol);
 
-    var isMouseDown = false;
-    this._canvas.addEventListener('mousedown', function(e) {
-      isMouseDown = true;
-      mouseAction(e);
-    });
-    this._canvas.addEventListener('mousemove', function(e) {
-      if (!isMouseDown) return;
-      e.target.style.cursor = 'default';
-      mouseAction(e);
-    });
-    this._canvas.addEventListener('mouseup', function(e) {
-      isMouseDown = false;
-    });
+    // Add mouse events
+    (function(__this) {
+      var isMouseDown = false;
+      __this._canvas.addEventListener('mousedown', function(e) {
+        isMouseDown = true;
+        mouseAction(e);
+      });
+      __this._canvas.addEventListener('mousemove', function(e) {
+        if (!isMouseDown) return;
+        e.target.style.cursor = 'default';
+        mouseAction(e);
+      });
+      __this._canvas.addEventListener('mouseup', function(e) {
+        isMouseDown = false;
+      });
 
-    function mouseAction(e) {
-      var col = Math.floor(e.offsetX * this._nCol / this._canvas.width);
-      var row = Math.floor(e.offsetY * this._nRow / this._canvas.height);
-      if (!isInBoard(col, row)) return;
-      switch (e.button) {
-        case 0:
-          drawBlock(col, row);
-          break;
-        case 2:
-          clearBlock(col, row);
-          break;
+      function mouseAction(e) {
+        var col = Math.floor(e.offsetX * __this._nCol / __this._canvas.width);
+        var row = Math.floor(e.offsetY * __this._nRow / __this._canvas.height);
+        if (!isInBoard(col, row)) return;
+        switch (e.button) {
+          case 0:
+            drawBlock(col, row);
+            break;
+          case 2:
+            clearBlock(col, row);
+            break;
+        }
       }
-    }
 
-    function isInBoard(col, row) {
-      return 1 <= col && col < this._nCol - 1 && 1 <= row && row < this._nRow - 1;
-    }
+      function isInBoard(col, row) {
+        return 1 <= col && col < __this._nCol - 1 && 1 <= row && row < __this._nRow - 1;
+      }
 
-    function drawBlock(col, row) {
-      this._board[row * this._nCol + col] = 1;
-      this._ctx.fillRect(col * this._cellSize, row * this._cellSize, this._cellSize, this._cellSize);
-    }
+      function drawBlock(col, row) {
+        __this._board[row * __this._nCol + col] = 1;
+        __this._ctx.fillRect(col * __this._cellSize, row * __this._cellSize, __this._cellSize, __this._cellSize);
+      }
 
-    function clearBlock(col, row) {
-      this._board[row * this._nCol + col] = 0;
-      this._ctx.clearRect(col * this._cellSize, row * this._cellSize, this._cellSize, this._cellSize);
-    }
+      function clearBlock(col, row) {
+        __this._board[row * __this._nCol + col] = 0;
+        __this._ctx.clearRect(col * __this._cellSize, row * __this._cellSize, __this._cellSize, __this._cellSize);
+      }
+    })(this);
   };
-
 
   LifegameBoard.prototype.initBoard = function(genRate) {
     genRate = genRate || 0.5;
